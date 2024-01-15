@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>navtest</title>
+  </head>
+  <body>
+    <script>
+      const successCallback = (position) => {
+        let lat = position.coords.latitude;
+        let lon = position.coords.longitude;
+        let url = `https://www.google.com/maps/place/${lat},${lon}`;
+        window.open(url);
+      };
+
+      const errorCallback = (error) => {
+        console.log(error);
+      };
+
+      const options = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+      };
+
+      function getCoordinates() {
+        navigator.geolocation.getCurrentPosition(
+          successCallback,
+          errorCallback,
+          options
+        );
+      }
+    </script>
+
+    <input type="button" onclick="getCoordinates()" value="show on map" />
+  </body>
+</html>
